@@ -16,6 +16,11 @@ export default function (state = initialState, action) {
         ...state,
         playlist: payload,
       };
+    case 'CLEAR_PLAYLIST':
+      return {
+        ...state,
+        playlist: {},
+      };
     default:
       return state;
   }

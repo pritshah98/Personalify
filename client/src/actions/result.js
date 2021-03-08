@@ -24,3 +24,14 @@ export const setResult = (filter, token) => async (dispatch) => {
     console.error(error.message);
   }
 };
+
+// Clear playlist in reducer
+export const clearResult = () => async (dispatch) => {
+  try {
+    dispatch({
+      type: 'CLEAR_PLAYLIST',
+    });
+  } catch (error) {
+    console.error(error.message);
+  }
+};

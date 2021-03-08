@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import CardGrid from './CardGrid';
 import Spinner from '../layout/Spinner';
 import { withRouter, useHistory } from 'react-router-dom';
-import { setResult } from '../../actions/result';
+import { clearResult, setResult } from '../../actions/result';
 import { connect } from 'react-redux';
 
-const Result = ({ result, playlist, setResult }) => {
+const Result = ({ result, playlist, setResult, clearResult }) => {
   useEffect(() => {
     let isMounted = true;
     if (isMounted) setResult(result, localStorage.getItem('accessToken'));
@@ -23,7 +23,10 @@ const Result = ({ result, playlist, setResult }) => {
       <div>
         <button
           className='btn btn-primary'
-          onClick={(e) => history.push('/spotifyapp/quiz')}
+          onClick={(e) => {
+            clearResult();
+            history.push('/spotifyapp/quiz');
+          }}
         >
           Retake quiz!
         </button>
@@ -37,6 +40,7 @@ Result.propTypes = {
   result: PropTypes.string.isRequired,
   playlist: PropTypes.object.isRequired,
   setResult: PropTypes.func.isRequired,
+  clearResult: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -44,4 +48,6 @@ const mapStateToProps = (state) => ({
   playlist: state.result.playlist,
 });
 
-export default connect(mapStateToProps, { setResult })(withRouter(Result));
+export default connect(mapStateToProps, { setResult, clearResult })(
+  withRouter(Result)
+);
