@@ -110,7 +110,7 @@ const SongCard = (props) => {
               aria-label='play/pause'
               onClick={(e) => {
                 e.preventDefault();
-                window.open(`${song.preview_url}`, '_blank');
+                window.open(`${song.external_urls.spotify}`, '_blank');
               }}
             >
               <PlayArrowIcon className={classes.playIcon} />
